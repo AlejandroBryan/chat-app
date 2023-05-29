@@ -6,12 +6,31 @@ import {
   TouchableOpacity,
   ImageBackground,
   Button,
+  Alert
 } from "react-native";
 import { useState } from "react";
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 const StartScreen = ({ navigation }) => {
+  const auth = getAuth();
+
   const [username, setUsername] = useState("");
   const [color, setColor] = useState("");
+
+  const signInUser = () => {
+    signInAnonymously(auth)
+      .then(result => {
+        navigation.navigate("Chat", { 
+          userID: result.user.uid,
+          username: username,
+          color: color,
+         });
+        Alert.alert("Signed in Successfully!");
+      })
+      .catch((error) => {
+        Alert.alert("Unable to sign in, try later again.");
+      })
+  }
 
   return (
     <View style={styles.container}>
@@ -20,9 +39,7 @@ const StartScreen = ({ navigation }) => {
         resizeMode="cover"
         style={styles.image}
       >
-      
-          <Text style={styles.textTitle}>Chat-Demo</Text>
-        
+        <Text style={styles.textTitle}>Chat-Demo</Text>
 
         <View style={styles.Section}>
           <TextInput
@@ -53,22 +70,12 @@ const StartScreen = ({ navigation }) => {
               style={[styles.button, styles.violet]}
               onPress={() => setColor("#E5D6FC")}
             ></TouchableOpacity>
-             
           </View>
           <Button
-              style={styles.startButton}
-              title="Start Chatting"
-              onPress={() =>
-                navigation.navigate("Chat", {
-                  username: username,
-                  color: color,
-                })
-              }
-            />
-
-          
-          
-         
+            style={styles.startButton}
+            title="Start Chatting"
+            onPress={signInUser}
+          />
         </View>
       </ImageBackground>
     </View>
