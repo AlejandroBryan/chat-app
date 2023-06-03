@@ -14,7 +14,7 @@ import { getAuth, signInAnonymously } from "firebase/auth";
 const StartScreen = ({ navigation }) => {
   const auth = getAuth();
 
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [color, setColor] = useState("");
 
   const signInUser = () => {
@@ -22,7 +22,7 @@ const StartScreen = ({ navigation }) => {
       .then(result => {
         navigation.navigate("Chat", { 
           userID: result.user.uid,
-          username: username,
+          name: name,
           color: color,
          });
         Alert.alert("Signed in Successfully!");
@@ -44,9 +44,9 @@ const StartScreen = ({ navigation }) => {
         <View style={styles.Section}>
           <TextInput
             style={styles.textInput}
-            value={username}
-            onChangeText={setUsername}
-            placeholder="Type your username here"
+            value={name}
+            onChangeText={setName}
+            placeholder="Type your name here"
           />
           <Text style={{ alignSelf: "center", fontSize: 25 }}>
             Chose a color
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   textTitle: {
-    fontWeight: 600,
+    fontWeight: Platform.OS === 'android' ? 'normal' : '400',
     fontSize: 45,
     color: "#fff",
     textAlign: "center",
