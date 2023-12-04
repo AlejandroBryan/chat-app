@@ -21,7 +21,7 @@ I'am currently using Node version 18.15.0 LTS.
 
 ```css
 1- clone the application
-git clone https://github.com/AlejandroBryan/chat-demo.git
+git clone https://github.com/AlejandroBryan/chat-app.git
 cd /chat-demo
 
 2- install all dependencies and devdependencies.
