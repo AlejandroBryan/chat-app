@@ -31,7 +31,7 @@ npm install
 3- run the application.
 
 expo start
-
+```
 if you need more help? check the Expo documentation out
 * [Expo Documentation](https://expo.dev/)
 
@@ -54,4 +54,4 @@ Reference, code, documentation, etc.
 
 
 
-```
+
